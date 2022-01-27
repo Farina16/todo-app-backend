@@ -1,0 +1,37 @@
+type Task {
+    _id: String
+    name: String
+    status: String
+}
+
+type TaskResponse {
+  edges: [Task]
+}
+
+input TaskFilter {
+  id: String
+  name: String
+}
+
+input TaskInput {
+    name: String
+    status: String
+}
+
+
+type TaskDeleteResponse{
+  edges: [Task]
+  modified: Int
+}
+
+type Mutation {
+  addTask(payload:TaskInput!): Task
+  updateTask(where:TaskFilter,payload:TaskInput!): TaskDeleteResponse
+
+  deleteTask(where:TaskFilter): TaskDeleteResponse
+}
+
+type Query {
+  listTasks(where: TaskFilter): TaskResponse
+}
+
